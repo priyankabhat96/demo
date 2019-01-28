@@ -1,0 +1,117 @@
+<html>
+
+<head>
+    <title>My table</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <style>
+        .container {
+         background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgZnWwKAiPREPbwyjrZyxFwRv6xOWXkkGjJ4SAMnUpvPOWaUHF");
+         background-repeat: no-repeat;
+         background-size:cover;  
+         height:100%; 
+         width:100%;
+    }
+    .topright {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 18px;
+  /* background-color: #4CAF50; */
+}
+.center { 
+  display: flex; 
+  justify-content: center;
+   }
+.table {
+    margin-top:100px;
+}
+</style>
+
+   
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $("#log").click(function () {
+                console.log("logout");
+
+
+                $.ajax({
+                    type: "GET",
+                    url: "/",
+                    success: (data) => {
+                        console.log("success logout");
+                        alert("logout succesfully");
+                        localStorage.removeItem('myToken');
+                        $("html").html(data);
+                    },
+                    error: (data) => {
+                        console.log("error logout");
+                        console.log(data);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body >
+    
+    <div class="container">
+        <form>
+
+    <!-- <div> -->
+        <h1 align="center" style="color:darkred"> My table</h1>
+    
+        
+    <!-- </div> -->
+    
+        <!-- to add the firstname and lastname -->
+    
+       <div class="disp">
+          
+        <table class="table table-striped table-hover table-bordered ">
+
+            <th style="color:steelblue">Day</th>
+            <th  style="color:steelblue">3am</th>
+            <th  style="color:steelblue">6am</th>
+            <th  style="color:steelblue">9am</th>
+            <th  style="color:steelblue">12pm</th>
+            <th  style="color:steelblue">3pm</th>
+            <th style="color:steelblue">6pm</th>
+            <th  style="color:steelblue">9pm</th>
+            <th  style="color:steelblue"> 12am</th>
+            <%for(let i=0;i < name.length; i++){%>
+
+            <tr class="warning" >
+                <td class="active">
+                    <%=name[i].day%>
+                </td>
+                <%for(let j=0;j < name[i].temperature.length; j++){%>
+                <td>
+                    <%=name[i].temperature[j]%>
+                </td>
+                <%}%>
+            </tr>
+            <%}%>
+
+        </table>
+    </div> 
+        <div class="topright">
+                
+            
+                <button type="button" class="btn btn-primary btn-md" id="log" >Logout</button>
+        </div>
+    
+
+            </form>
+        
+        
+        </div>
+    
+</body>
+
+</html>

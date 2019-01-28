@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>LOGIN</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+      $("#login").click(function () {
+        console.log("within login");
+        var logininfo = {};
+        logininfo.username = $("#un").val(),
+          logininfo.password = $("#pwd").val()
+        $.ajax({
+          type: "POST",
+          url: "/authenticate",
+          data: logininfo,
+          success: (data1) => {
+            $.ajax({
+              type: "GET",
+              url: "/verify",
+              data: data1,
+              headers: {
+                'tok': data1.token
+              },
+              success: (data) => {
+                $("body").replaceWith(data);
+                alert("token verified");
+              },
+              error: (error) => {
+                alert("authentication failed");
+              }
+
+            })
+          },
+          error: (data) => {
+            console.log(data);
+          }
+        });
+      });
+    });
+
+  </script>
+</head>
+
+<body>
+  <h2>Login Form</h2>
+  <!--  -->
+  <form>
+    <div class="container">
+      <label for="uname"><b>Username</b></label> <br>
+      <input type="text" placeholder="Enter Username" name="uname" id="un" required><br>
+      <label for="psw"><b>Password</b></label><br>
+      <input type="password" placeholder="Enter Password" name="psw" id="pwd" required><br><br>
+      <input type="button" value="login" id="login">
+    </div>
+  </form>
+
+</body>
+
+</html>
