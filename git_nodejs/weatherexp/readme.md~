@@ -1,0 +1,41 @@
+Name of the prioject:Weather app
+Project Overview: This app displays chart for 5 days temperarture taken for every 3 hours
+
+<!-- A list of files included:                
+                -config
+                    -config.js [To set up the database connection]
+                -model
+                    -Consists of the database structures               s               
+                -views
+                    -Consists of the webpage designs
+                -app.js [Executable Program]
+                -README.md [Information file] -->
+
+Steps to insatll:
+1.  Start the mongo Db
+~~~ 
+            ./mongod
+~~~
+
+2.  Install node modules
+~~~
+            npm i
+~~~
+
+3.  Open app.js file and execute
+~~~
+            node app.js
+~~~
+
+4.  Type the url with respective port number
+~~~
+            localhost:<portnumer>/
+            localhost:3004/
+~~~
+
+5.  The login page 
+        i) LOGIN:
+                Registered Users can Login by typing the credentials
+        
+
+6.  After successful login, it displays chart.One can view chart for seperate days and also for all at a time. Press 'view table'             Button takes to tabular display page. Logout button which renders back the HomePage.

@@ -1,0 +1,109 @@
+<html>
+
+<head>
+  <title>Highcharts Tutorial</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+  </script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <style>
+    .topright {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 18px;
+  }
+  </style>
+
+</head>
+
+<body>
+    Highcharts Tutorial
+  <div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+  <script language="JavaScript">
+    $(document).ready(function () {
+      var tok = localStorage.getItem('myToken');
+      $.ajax({
+        type: "GET",
+        url: "/api",
+        headers: { 'tok': tok },
+        success: (data1) => {
+          var series = [];
+          for (i = 0; i < data1.length; i++) {
+            series[i] = { name: data1[i].day, data: data1[i].temperature }
+          }
+          var title = {
+            text: 'Temperature variation for every three hours'
+          };
+          var subtitle = {
+            text: 'weather app'
+          }
+          var xAxis = {
+            categories: ['3AM', '6AM', '9AM', '12AM', '3PM', '6PM', '9PM', '12PM']
+
+          };
+          var yAxis = {
+            title: {
+              text: 'Temperature (\xB0C)'
+            },
+
+            plotLines: [{
+              value: 0,
+              width: 1,
+              color: '#808080'
+            }],
+
+          };
+
+          var tooltip = {
+            valueSuffix: '\xB0C'
+          }
+          var legend = {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+          };
+
+
+          var json = {};
+          json.title = title;
+          json.subtitle = subtitle;
+          json.xAxis = xAxis;
+          json.yAxis = yAxis;
+          json.tooltip = tooltip;
+          json.legend = legend;
+          json.series = series;
+          console.log(json);
+          $('#container').highcharts(json);
+        },
+        error: (data1) => {
+          console.log(data1);
+        }
+      })
+      $("#view").click(function () {
+        //console.log("logout");
+        // window.location.href = "/table";
+        $.ajax({
+          type: "post",
+          url: "/table",
+          headers:{'tok':tok},
+
+          success: (data) => {
+
+            $("html").html(data);
+          },
+          error: (data) => {
+            console.log(data);
+          }
+        });
+      });
+    });
+  </script>
+  <form>
+    <div class="topright">
+      <input type="button" value="View Table" id="view">
+    </div>
+  </form>
+</body>
+
+</html>

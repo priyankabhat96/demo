@@ -1,0 +1,28 @@
+
+version: "3.3"
+
+services:
+
+# NodeJS App's Container
+ app:
+  build:
+   context: ./
+  ports:
+    - 8080:3004
+  volumes:
+    - ./weatherexp:/code
+  tty: true
+  privileged: true
+  hostname: node_app
+
+# MongoDB container
+ mongodb:
+  build:
+   context: ./mongodb
+  hostname: mongodb 
+  tty: true
+  privileged: true
+
+  
+
+   

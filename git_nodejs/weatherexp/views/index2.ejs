@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <title><h1 align="center">my table</h1></title>
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+<!--  -->
+    body {
+         background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgZnWwKAiPREPbwyjrZyxFwRv6xOWXkkGjJ4SAMnUpvPOWaUHF");
+         background-repeat: no-repeat;
+         background-size:cover;
+    }
+    .topright {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 18px;
+  background-color: #4CAF50;
+}
+
+</style>
+</head>
+
+<body >
+    <div class="container">
+       <div >
+           <h1 align="center"> My table</h1>
+           <!-- <img src="https://plug2surge.com/uploadedimages/companyback/3325840.jpg" class="img-rounded" alt="Cinque Terre" width="304" height="236">  -->
+
+       </div>
+       <div >
+<!-- to add the firstname and lastname -->
+   
+    
+    <table  class="table  table-striped ">
+
+        <th>day</th>
+        <th>3am</th>
+        <th>6am</th>
+        <th>9am</th>
+        <th>12pm</th>
+        <th>3pm</th>
+        <th>6pm</th>
+        <th>9pm</th>
+        <th>12am</th>
+        <%for(let i=0;i < name.length; i++){%>
+            
+            <tr class="success">
+                <td><%=name[i].day%></td>
+                <%for(let j=0;j < name[i].temperature.length; j++){%>
+                <td><%=name[i].temperature[j]%></td>
+                <%}%>
+            </tr>
+            <%}%>
+          
+    </table>
+      <div class="topright">
+        <a href="/"><h2>logout</h2></a>
+    </div>
+    </div>
+    </div>
+</body>
+
+</html>
