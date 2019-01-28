@@ -1,0 +1,267 @@
+<html>
+
+<head>
+  <title>Highcharts Tutorial</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+  </script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <style>
+    .topright {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 18px;
+  }
+  
+
+.center { 
+  display: flex; 
+  justify-content: center;
+  
+   }
+  </style>
+
+</head>
+<script language="JavaScript">
+  function load(id) {
+
+    
+    $.ajax({
+      type: "GET",
+      url: "/day123",
+      headers: { 'day': id },
+      success: (data1) => {
+        var series = [];
+        for (i = 0; i < data1.length; i++) {
+          series[i] = { name: data1[i].day, data: data1[i].temperature }
+        }
+        var title = {
+          text: 'Temperature variation for every three hours'
+        };
+        var subtitle = {
+          text: 'weather app'
+        }
+        var xAxis = {
+          categories: ['3AM', '6AM', '9AM', '12AM', '3PM', '6PM', '9PM', '12PM']
+
+        };
+        var yAxis = {
+          title: {
+            text: 'Temperature (\xB0C)'
+          },
+
+          plotLines: [{
+            value: 0,
+            width: 1,
+            color: '#808080'
+          }],
+
+        };
+
+        var tooltip = {
+          valueSuffix: '\xB0C'
+        }
+        var legend = {
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'middle',
+          borderWidth: 0
+        };
+
+
+        var json = {};
+        json.title = title;
+        json.subtitle = subtitle;
+        json.xAxis = xAxis;
+        json.yAxis = yAxis;
+        json.tooltip = tooltip;
+        json.legend = legend;
+        json.series = series;
+      //  console.log(json);
+        $('#container').highcharts(json);
+      },
+      error: (data1) => {
+        console.log(data1);
+      }
+    })
+    
+  } 
+</script>
+<script language="JavaScript">
+
+  $(document).ready(function () {
+    var tok = localStorage.getItem('myToken');
+    $.ajax({
+      type: "GET",
+      url: "/api",
+      headers: { 'tok': tok },
+      success: (data1) => {
+        var series = [];
+        for (i = 0; i < data1.length; i++) {
+          series[i] = { name: data1[i].day, data: data1[i].temperature }
+        }
+        var title = {
+          text: 'Temperature variation for every three hours'
+        };
+        var subtitle = {
+          text: 'weather app'
+        }
+        var xAxis = {
+          categories: ['3AM', '6AM', '9AM', '12AM', '3PM', '6PM', '9PM', '12PM']
+
+        };
+        var yAxis = {
+          title: {
+            text: 'Temperature (\xB0C)'
+          },
+
+          plotLines: [{
+            value: 0,
+            width: 1,
+            color: '#808080'
+          }],
+
+        };
+
+        var tooltip = {
+          valueSuffix: '\xB0C'
+        }
+        var legend = {
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'middle',
+          borderWidth: 0
+        };
+
+
+        var json = {};
+        json.title = title;
+        json.subtitle = subtitle;
+        json.xAxis = xAxis;
+        json.yAxis = yAxis;
+        json.tooltip = tooltip;
+        json.legend = legend;
+        json.series = series;
+       // console.log(json);
+        $('#container').highcharts(json);
+      },
+      error: (data1) => {
+        console.log(data1);
+      }
+    })
+    $("#view").click(function () {
+      
+     // window.location.href = "/table";
+       $.ajax({
+         type: "GET",
+         url: "/table",
+         headers: { 'tok': tok },
+
+         success: (data) => {
+           console.log(data)
+           $("html").html(data);
+         },
+         error: (data) => {
+           console.log(data);
+         }
+       });
+
+
+
+    });
+
+
+  });
+</script>
+
+
+<script language="JavaScript">
+    function load1(id) {
+      
+      $.ajax({
+        type: "GET",
+        url: "/all",
+        success: (data1) => {
+          var series = [];
+          for (i = 0; i < data1.length; i++) {
+            series[i] = { name: data1[i].day, data: data1[i].temperature }
+          }
+          var title = {
+            text: 'Temperature variation for every three hours'
+          };
+          var subtitle = {
+            text: 'weather app'
+          }
+          var xAxis = {
+            categories: ['3AM', '6AM', '9AM', '12AM', '3PM', '6PM', '9PM', '12PM']
+
+          };
+          var yAxis = {
+            title: {
+              text: 'Temperature (\xB0C)'
+            },
+
+            plotLines: [{
+              value: 0,
+              width: 1,
+              color: '#808080'
+            }],
+
+          };
+
+          var tooltip = {
+            valueSuffix: '\xB0C'
+          }
+          var legend = {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+          };
+
+
+          var json = {};
+          json.title = title;
+          json.subtitle = subtitle;
+          json.xAxis = xAxis;
+          json.yAxis = yAxis;
+          json.tooltip = tooltip;
+          json.legend = legend;
+          json.series = series;
+         // console.log(json);
+          $('#container').highcharts(json);
+        },
+        error: (data1) => {
+          console.log(data1);
+        }
+      })
+
+    }
+  </script>
+
+<body>
+  <div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+  <form>
+    <div class="center">
+      <input type="button" class="btn btn-warning btn-md" value="Monday" id="Monday" onclick=load(id)>
+      <input type="button"  class="btn btn-success btn-md"value="Tuesday" id="Tuesday" onclick=load(id)>
+
+      <input type="button" class="btn btn-info btn-md"value="Wednesday" id="Wednesday" onclick=load(id)>
+
+      <input type="button" class="btn btn-danger btn-md"value="Thursday" id="Thursday" onclick=load(id)>
+      <input type="button" class="btn btn-primary btn-md"value="Friday" id="Friday" onclick=load(id)>
+      <input type="button" class="btn btn-default btn-md"value="ALL" id="ALL" onclick=load1(id)>
+
+    </div>
+
+    <div class="topright">
+      <input type="button" style="color:tomato"value="View Table" id="view">
+    </div>
+  </form>
+</body>
+
+</html>
